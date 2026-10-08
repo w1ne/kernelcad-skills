@@ -1,0 +1,138 @@
+{
+  "name": "kernelcad",
+  "version": "0.17.0",
+  "description": "kernelCAD authoring skills — OCCT NURBS BREP CAD, agent-first, ships STEP.",
+  "kernelcad": {
+    "requires": {
+      "kernelcad": "^0.17.0"
+    },
+    "mcp": {
+      "default": "local",
+      "local": {
+        "command": "kernelcad",
+        "args": [
+          "mcp"
+        ]
+      },
+      "remote": {
+        "url": "https://api.kernelcad.com/mcp",
+        "authEnv": "KERNELCAD_API_KEY"
+      }
+    }
+  },
+  "skills": [
+    {
+      "name": "kernelcad-assemblies",
+      "path": "skills/kernelcad-assemblies/SKILL.md"
+    },
+    {
+      "name": "kernelcad-authoring",
+      "path": "skills/kernelcad-authoring/SKILL.md"
+    },
+    {
+      "name": "kernelcad-drawings",
+      "path": "skills/kernelcad-drawings/SKILL.md"
+    },
+    {
+      "name": "kernelcad-fea",
+      "path": "skills/kernelcad-fea/SKILL.md"
+    },
+    {
+      "name": "kernelcad-features",
+      "path": "skills/kernelcad-features/SKILL.md"
+    },
+    {
+      "name": "kernelcad-fields",
+      "path": "skills/kernelcad-fields/SKILL.md"
+    },
+    {
+      "name": "kernelcad-from-reference",
+      "path": "skills/kernelcad-from-reference/SKILL.md"
+    },
+    {
+      "name": "blockout-model",
+      "path": "skills/kernelcad-from-reference/blockout-model/SKILL.md"
+    },
+    {
+      "name": "image-replicator",
+      "path": "skills/kernelcad-from-reference/image-replicator/SKILL.md"
+    },
+    {
+      "name": "kernelcad-trace-from-image",
+      "path": "skills/kernelcad-from-reference/kernelcad-trace-from-image/SKILL.md"
+    },
+    {
+      "name": "photo-to-device",
+      "path": "skills/kernelcad-from-reference/photo-to-device/SKILL.md"
+    },
+    {
+      "name": "prepare-prompt",
+      "path": "skills/kernelcad-from-reference/prepare-prompt/SKILL.md"
+    },
+    {
+      "name": "render-inspect",
+      "path": "skills/kernelcad-from-reference/render-inspect/SKILL.md"
+    },
+    {
+      "name": "use-the-available-kernel",
+      "path": "skills/kernelcad-from-reference/use-the-available-kernel/SKILL.md"
+    },
+    {
+      "name": "kernelcad-kinematic",
+      "path": "skills/kernelcad-kinematic/SKILL.md"
+    },
+    {
+      "name": "kernelcad-mcp",
+      "path": "skills/kernelcad-mcp/SKILL.md"
+    },
+    {
+      "name": "kernelcad-nurbs",
+      "path": "skills/kernelcad-nurbs/SKILL.md"
+    },
+    {
+      "name": "kernelcad-params",
+      "path": "skills/kernelcad-params/SKILL.md"
+    },
+    {
+      "name": "kernelcad-parts",
+      "path": "skills/kernelcad-parts/SKILL.md"
+    },
+    {
+      "name": "kernelcad-patterns",
+      "path": "skills/kernelcad-patterns/SKILL.md"
+    },
+    {
+      "name": "kernelcad-print",
+      "path": "skills/kernelcad-print/SKILL.md"
+    },
+    {
+      "name": "kernelcad-repair",
+      "path": "skills/kernelcad-repair/SKILL.md"
+    },
+    {
+      "name": "kernelcad-sdformat",
+      "path": "skills/kernelcad-sdformat/SKILL.md"
+    },
+    {
+      "name": "kernelcad-sheet-metal",
+      "path": "skills/kernelcad-sheet-metal/SKILL.md"
+    },
+    {
+      "name": "kernelcad-shopcheck",
+      "path": "skills/kernelcad-shopcheck/SKILL.md"
+    },
+    {
+      "name": "kernelcad-srdf",
+      "path": "skills/kernelcad-srdf/SKILL.md"
+    },
+    {
+      "name": "kernelcad-urdf",
+      "path": "skills/kernelcad-urdf/SKILL.md"
+    },
+    {
+      "name": "kernelcad",
+      "path": "skills/kernelcad/SKILL.md",
+      "entry": true
+    }
+  ]
+}
