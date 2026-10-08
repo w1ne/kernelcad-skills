@@ -1,7 +1,7 @@
 {
   "name": "kernelcad",
   "version": "0.17.0",
-  "description": "kernelCAD authoring skills — OCCT NURBS BREP CAD, agent-first, ships STEP.",
+  "description": "kernelCAD authoring skills \u2014 OCCT NURBS BREP CAD, agent-first, ships STEP.",
   "kernelcad": {
     "requires": {
       "kernelcad": "^0.17.0"
@@ -15,8 +15,7 @@
         ]
       },
       "remote": {
-        "url": "https://api.kernelcad.com/mcp",
-        "authEnv": "KERNELCAD_API_KEY"
+        "url": "https://mcp.kernelcad.com/mcp"
       }
     }
   },
@@ -47,35 +46,35 @@
     },
     {
       "name": "kernelcad-from-reference",
-      "path": "skills/kernelcad-from-reference/SKILL.md"
+      "path": "skills/SKILL.md"
     },
     {
       "name": "blockout-model",
-      "path": "skills/kernelcad-from-reference/blockout-model/SKILL.md"
+      "path": "skills/blockout-model/SKILL.md"
     },
     {
       "name": "image-replicator",
-      "path": "skills/kernelcad-from-reference/image-replicator/SKILL.md"
+      "path": "skills/image-replicator/SKILL.md"
     },
     {
       "name": "kernelcad-trace-from-image",
-      "path": "skills/kernelcad-from-reference/kernelcad-trace-from-image/SKILL.md"
+      "path": "skills/kernelcad-trace-from-image/SKILL.md"
     },
     {
       "name": "photo-to-device",
-      "path": "skills/kernelcad-from-reference/photo-to-device/SKILL.md"
+      "path": "skills/photo-to-device/SKILL.md"
     },
     {
       "name": "prepare-prompt",
-      "path": "skills/kernelcad-from-reference/prepare-prompt/SKILL.md"
+      "path": "skills/prepare-prompt/SKILL.md"
     },
     {
       "name": "render-inspect",
-      "path": "skills/kernelcad-from-reference/render-inspect/SKILL.md"
+      "path": "skills/render-inspect/SKILL.md"
     },
     {
       "name": "use-the-available-kernel",
-      "path": "skills/kernelcad-from-reference/use-the-available-kernel/SKILL.md"
+      "path": "skills/use-the-available-kernel/SKILL.md"
     },
     {
       "name": "kernelcad-kinematic",
