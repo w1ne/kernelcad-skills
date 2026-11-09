@@ -16,8 +16,35 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate package inventory and icon
-        run: node scripts/validate-claude-package.mjs
+      - name: Verify discoverable skills and package identity
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFileSync, readdirSync } from 'node:fs';
+          const read = (f) => readFileSync(f, 'utf8');
+          const plugin = JSON.parse(read('.claude-plugin/plugin.json'));
+          const market = JSON.parse(read('.claude-plugin/marketplace.json'));
+          assert.equal(plugin.version, read('VERSION').trim());
+          assert.equal(plugin.name, 'kernelcad-design-skills');
+          assert.equal(market.plugins[0].name, plugin.name);
+          assert.equal(market.plugins[0].version, plugin.version);
+          assert(!('skills' in plugin));
+          assert(!('mcpServers' in plugin));
+          const skills = readdirSync('skills', { withFileTypes: true }).filter(e => e.isDirectory());
+          assert.equal(skills.length, 28);
+          for (const {name} of skills) {
+            const s = read(`skills/${name}/SKILL.md`);
+            const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(s)?.[1];
+            assert(fm && fm.includes(`name: ${name}`) && /^description:\s*\S/m.test(fm), name);
+          }
+          const img = readFileSync('.claude-plugin/icon.png');
+          assert(img.byteLength < 2 * 1024 * 1024);
+          assert.equal(img.subarray(0,8).toString('hex'), '89504e470d0a1a0a');
+          assert.equal(img.readUInt32BE(16), 512);
+          assert.equal(img.readUInt32BE(20), 512);
+          console.log(`PASS ${plugin.name}@${plugin.version}: ${skills.length} skills, valid 512px icon`);
+          JS
       - name: Install pinned official Claude CLI
         run: npm install --global @anthropic-ai/claude-code@2.1.310
       - name: Validate plugin for Claude directory

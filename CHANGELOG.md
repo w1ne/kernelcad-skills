@@ -1,7 +1,7 @@
 # kernelCAD skills v0.17.1 (Claude package repair)
 
 - Correct Claude plugin manifest for automatic discovery of all 28 skills.
-- Add consistent marketplace metadata, branded square icon, and repeatable CI validation.
+- Add consistent marketplace metadata, branded square icon, and repeatable CI validation without runtime scripts.
 - Keep existing user-connected MCP servers; do not auto-install duplicate connections or read credentials.
 
 # Unreleased

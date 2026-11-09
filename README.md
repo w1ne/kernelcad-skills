@@ -4,7 +4,7 @@ Cross-agent install for the kernelCAD skill tree. Local MCP by default; hosted M
 
 ## Claude plugin package
 
-The Claude directory plugin uses the standard Claude plugin manifest at `.claude-plugin/plugin.json` and automatically discovers the skills under `skills/*/SKILL.md`. It contains **no credentials**, hooks, or bundled MCP server. Reuse an existing `kernelCAD` connector if one is already connected; otherwise follow the hosted connection guide at https://kernelcad.com/mcp/.
+The Claude directory plugin uses the standard Claude plugin manifest at `.claude-plugin/plugin.json` and automatically discovers the skills under `skills/*/SKILL.md`. It contains **no credentials**, executable installer scripts, hooks, or bundled MCP server. Reuse an existing `kernelCAD` connector if one is already connected; otherwise follow the hosted connection guide at https://kernelcad.com/mcp/.
 
 For Claude Code, install the maintained skills package:
 
