@@ -1,7 +1,7 @@
 {
   "name": "kernelcad-design-skills",
-  "version": "0.17.1",
-  "description": "Create editable mechanical CAD parts and assemblies with the kernelCAD toolchain. Plan parametric geometry, inspect dimensions, review manufacturability, and export manufacturing files using an existing kernelCAD MCP connection or the local CLI.",
+  "version": "0.17.2",
+  "description": "Create, inspect, revise and export editable mechanical CAD using the hosted kernelCAD MCP server and 28 specialized skills.",
   "author": {
     "name": "kernelCAD",
     "url": "https://kernelcad.com"
@@ -10,6 +10,17 @@
   "repository": "https://github.com/w1ne/kernelcad-skills",
   "license": "MIT",
   "keywords": [
-    "cad", "parametric-cad", "mechanical-design", "mcp", "manufacturing", "step", "stl", "3d-printing", "cnc", "robotics"
-  ]
+    "cad",
+    "parametric-cad",
+    "mechanical-design",
+    "mcp",
+    "manufacturing",
+    "step",
+    "stl",
+    "3d-printing",
+    "cnc",
+    "robotics"
+  ],
+  "privacyPolicyUrl": "https://kernelcad.com/privacy",
+  "displayName": "kernelCAD — Parametric CAD & MCP"
 }

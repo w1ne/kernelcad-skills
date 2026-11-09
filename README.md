@@ -1,19 +1,19 @@
 # kernelCAD skills
 
-Cross-agent install for the kernelCAD skill tree. Local MCP by default; hosted MCP available as an opt-in fallback.
+Claude package with 28 CAD skills and a hosted kernelCAD MCP server. Local CLI integration remains available for other agents.
 
 ## Claude plugin package
 
-The Claude directory plugin uses the standard Claude plugin manifest at `.claude-plugin/plugin.json` and automatically discovers the skills under `skills/*/SKILL.md`. It contains **no credentials**, executable installer scripts, hooks, or bundled MCP server. Reuse an existing `kernelCAD` connector if one is already connected; otherwise follow the hosted connection guide at https://kernelcad.com/mcp/.
+The Claude directory plugin uses the standard Claude plugin manifest at `.claude-plugin/plugin.json` and automatically discovers the skills under `skills/*/SKILL.md`. It includes a remote HTTP MCP server declaration in .mcp.json, plus 28 skills. It contains no credentials, executable installer scripts, hooks, or local MCP binaries. Claude Code loads the hosted server when the plugin is enabled and authorizes when necessary. In Claude.ai, reuse an existing kernelCAD connector instead of adding a duplicate. Server: https://mcp.kernelcad.com/mcp.
 
-For Claude Code, install the maintained skills package:
+For Claude Code, install the MCP + skills plugin:
 
 ```bash
 claude plugin marketplace add w1ne/kernelcad-skills
 claude plugin install kernelcad-design-skills@kernelcad-design-skills
 ```
 
-Use the existing kernelCAD MCP tools for geometric evaluation and export. These skills provide instructions; they do not run CAD or manufacture a part by themselves. The `npx skills add` instructions below remain available to other agents.
+The plugin makes actual kernelCAD MCP tools available for CAD evaluation, inspection, modification, and export. The skills supply design instructions; they are not a substitute for geometric verification. The cross-agent skills installer below remains available.
 
 ## Install
 
@@ -40,7 +40,7 @@ Install the CLI once:
 npm i -g kernelcad@^0.17
 ```
 
-Then register a local stdio MCP server in your agent (per-agent snippets below).
+For agents that do not use the Claude plugin, register a local stdio MCP server (per-agent snippets below). Avoid a second server if the plugin already provides one.
 
 #### Claude Code
 
@@ -74,9 +74,9 @@ Add the kernelcad MCP entry to your settings:
 { "mcp.servers": { "kernelcad": { "command": "kernelcad", "args": ["mcp"] } } }
 ```
 
-### Hosted
+### Hosted (manual connection for agents without the plugin)
 
-No local install. OAuth runs on the first tool call.
+The Claude plugin includes the hosted HTTP MCP server automatically. For other clients, connect explicitly and complete client authorization when requested. Never place credentials in prompts.
 
 ```bash
 claude mcp add --transport http kernelcad https://mcp.kernelcad.com/mcp

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "kernelcad": {
+      "type": "http",
+      "url": "https://mcp.kernelcad.com/mcp"
+    }
+  }
+}
