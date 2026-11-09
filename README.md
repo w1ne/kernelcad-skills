@@ -2,6 +2,19 @@
 
 Cross-agent install for the kernelCAD skill tree. Local MCP by default; hosted MCP available as an opt-in fallback.
 
+## Claude plugin package
+
+The Claude directory plugin uses the standard Claude plugin manifest at `.claude-plugin/plugin.json` and automatically discovers the skills under `skills/*/SKILL.md`. It contains **no credentials**, executable installer scripts, hooks, or bundled MCP server. Reuse an existing `kernelCAD` connector if one is already connected; otherwise follow the hosted connection guide at https://kernelcad.com/mcp/.
+
+For Claude Code, install the maintained skills package:
+
+```bash
+claude plugin marketplace add w1ne/kernelcad-skills
+claude plugin install kernelcad-design-skills@kernelcad-design-skills
+```
+
+Use the existing kernelCAD MCP tools for geometric evaluation and export. These skills provide instructions; they do not run CAD or manufacture a part by themselves. The `npx skills add` instructions below remain available to other agents.
+
 ## Install
 
 ```bash

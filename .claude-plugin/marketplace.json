@@ -1,0 +1,32 @@
+{
+  "name": "kernelcad-design-skills",
+  "owner": {
+    "name": "kernelCAD",
+    "url": "https://kernelcad.com"
+  },
+  "plugins": [
+    {
+      "name": "kernelcad-design-skills",
+      "source": "./",
+      "description": "Author, review and export editable mechanical CAD with the kernelCAD MCP or local CLI.",
+      "version": "0.17.1",
+      "author": {
+        "name": "kernelCAD",
+        "url": "https://kernelcad.com"
+      },
+      "homepage": "https://kernelcad.com/mcp/",
+      "repository": "https://github.com/w1ne/kernelcad-skills",
+      "license": "MIT",
+      "keywords": [
+        "cad",
+        "parametric-cad",
+        "manufacturing",
+        "mcp",
+        "step",
+        "stl"
+      ],
+      "category": "productivity"
+    }
+  ],
+  "description": "Verified parametric CAD modeling and manufacturing skills for kernelCAD agents."
+}
