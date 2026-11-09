@@ -1,0 +1,26 @@
+name: Validate Claude directory package
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate package inventory and icon
+        run: node scripts/validate-claude-package.mjs
+      - name: Install pinned official Claude CLI
+        run: npm install --global @anthropic-ai/claude-code@2.1.310
+      - name: Validate plugin for Claude directory
+        run: claude plugin validate .claude-plugin/plugin.json --profile directory --strict
+      - name: Validate marketplace
+        run: claude plugin validate .claude-plugin/marketplace.json --strict
