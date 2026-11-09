@@ -31,6 +31,14 @@ jobs:
           assert.equal(market.plugins[0].version, plugin.version);
           assert(!('skills' in plugin));
           assert(!('mcpServers' in plugin));
+          const mcp = JSON.parse(read('.mcp.json'));
+          const server = mcp.mcpServers?.kernelcad;
+          assert.deepEqual(Object.keys(mcp.mcpServers).sort(), ['kernelcad']);
+          assert.equal(server.type, 'http');
+          assert.equal(server.url, 'https://mcp.kernelcad.com/mcp');
+          assert.equal(server.command, undefined, 'Do not spawn a second local MCP');
+          assert.equal(server.headers, undefined, 'Do not distribute credentials');
+          assert.equal(server.env, undefined, 'Do not read user environment secrets');
           const skills = readdirSync('skills', { withFileTypes: true }).filter(e => e.isDirectory());
           assert.equal(skills.length, 28);
           for (const {name} of skills) {
@@ -51,3 +59,54 @@ jobs:
         run: claude plugin validate .claude-plugin/plugin.json --profile directory --strict
       - name: Validate marketplace
         run: claude plugin validate .claude-plugin/marketplace.json --strict
+      - name: Live hosted MCP smoke test
+        timeout-minutes: 2
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          const config = JSON.parse(readFileSync('.mcp.json', 'utf8'));
+          const url = config.mcpServers.kernelcad.url;
+          let n = 0;
+          async function rpc(method, params, session) {
+            const headers = {'Content-Type':'application/json',Accept:'application/json,text/event-stream'};
+            if (session) headers['Mcp-Session-Id']=session;
+            const response = await fetch(url, {
+              method:'POST', headers, signal:AbortSignal.timeout(20000),
+              body:JSON.stringify({jsonrpc:'2.0',id:++n,method,params})
+            });
+            assert.equal(response.status,200, method+' HTTP '+response.status);
+            const text=await response.text();
+            const event=text.split(/\r?\n/).filter(line=>line.startsWith('data:')).map(line=>line.slice(5).trim()).join('\n');
+            const body=JSON.parse(event || text);
+            assert(!body.error, method+' MCP error '+JSON.stringify(body.error));
+            return {body,session:response.headers.get('mcp-session-id')};
+          }
+          const init=await rpc('initialize',{protocolVersion:'2025-06-18',capabilities:{},clientInfo:{name:'kernelcad-claude-ci',version:'1.0.0'}});
+          assert.equal(init.body.result.serverInfo.name,'kernelcad');
+          const listed=await rpc('tools/list',{},init.session);
+          const tools=listed.body.result.tools.map(tool=>tool.name);
+          for (const name of ['evaluate_script','inspect','export','lookup_api']) {
+            assert(tools.includes(name), 'MCP tool missing: '+name);
+          }
+          const test=await rpc('tools/call',{name:'evaluate_script',arguments:{code:'return box(20,20,5);'}},init.session);
+          assert.notEqual(test.body.result.isError,true);
+          const payload=JSON.parse(test.body.result.content.find(c=>c.type==='text').text);
+          assert.equal(payload.ok,true);
+          assert(Math.abs(payload.sceneSummary.volume-2000)<1e-6);
+          const exported=await rpc('tools/call',{
+            name:'export',arguments:{
+              target:'model',format:'step',
+              code:'return box(20,20,5);',output_path:'claude-plugin-qa.step'
+            }
+          },init.session);
+          assert.notEqual(exported.body.result.isError,true);
+          const step=exported.body.result.structuredContent ?? exported.body.result.content
+            .filter(c=>c.type==='text').map(c=>{try{return JSON.parse(c.text)}catch{return null}})
+            .find(value=>value?.ok!==undefined);
+          assert.equal(step.ok,true);
+          assert.equal(step.format,'step');
+          assert(step.byte_count>100);
+          assert(step.download_url?.startsWith('https://'));
+          console.log('PASS: '+tools.length+' remote tools; evaluation volume 2000 mm3; STEP export '+step.byte_count+' bytes');
+          JS

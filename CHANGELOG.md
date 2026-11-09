@@ -1,3 +1,9 @@
+# kernelCAD skills v0.17.2 (Claude hosted MCP integration)
+
+- Declare the production hosted HTTP MCP server, installed with the plugin alongside all 28 skills.
+- Validate live initialize and tools/list protocol, retaining OAuth and generic CAD tool behavior.
+- Do not distribute credentials or a duplicate local MCP server.
+
 # kernelCAD skills v0.17.1 (Claude package repair)
 
 - Correct Claude plugin manifest for automatic discovery of all 28 skills.

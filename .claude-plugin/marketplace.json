@@ -9,7 +9,7 @@
       "name": "kernelcad-design-skills",
       "source": "./",
       "description": "Author, review and export editable mechanical CAD with the kernelCAD MCP or local CLI.",
-      "version": "0.17.1",
+      "version": "0.17.2",
       "author": {
         "name": "kernelCAD",
         "url": "https://kernelcad.com"
@@ -28,5 +28,6 @@
       "category": "productivity"
     }
   ],
-  "description": "Verified parametric CAD modeling and manufacturing skills for kernelCAD agents."
+  "description": "Verified parametric CAD modeling and manufacturing skills for kernelCAD agents.",
+  "version": "0.17.2"
 }
